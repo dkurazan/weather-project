@@ -8,7 +8,6 @@ let inputContent = document.querySelector(".header__input input");
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=kyiv&units=metric&APPID=5d066958a60d315387d9492393935c19`)
     .then(res => res.json())
     .then(data => {
-        
         return new WeatherInfo(
             data.name,
             data.sys.country,
@@ -21,6 +20,16 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=kyiv&units=metric&APPID
             data.visibility,
         ).render()
     })
+// default Map
+function initMap() {
+    var opt = {
+        center: {lat: 50.4333, lng: 30.5167},
+        zoom: 9
+    }
+
+    var map = new google.maps.Map(document.getElementById("map"), opt);
+}
+
 
 //data from search
 class WeatherInfo {
@@ -60,7 +69,8 @@ class WeatherInfo {
                 <h3 class="visibility">Visibility: ${this.vis}km</h3>
             </div>
         </div>
-        `
+        `;
+        
     }
 }
 
@@ -69,7 +79,6 @@ searchButton.addEventListener("click", () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${myCity}&units=metric&APPID=5d066958a60d315387d9492393935c19`)
     .then(res => res.json())
     .then(data => {
-        
         return new WeatherInfo(
             data.name,
             data.sys.country,
@@ -81,7 +90,8 @@ searchButton.addEventListener("click", () => {
             data.main.humidity,
             data.visibility,
         ).render()
-    })
+    }).catch(error => alert("There is no city with that name"))
+
 })
 
 inputContent.addEventListener('keypress', function (e) {
@@ -90,7 +100,6 @@ inputContent.addEventListener('keypress', function (e) {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${myCity}&units=metric&APPID=5d066958a60d315387d9492393935c19`)
         .then(res => res.json())
         .then(data => {
-            
             return new WeatherInfo(
                 data.name,
                 data.sys.country,
@@ -102,6 +111,34 @@ inputContent.addEventListener('keypress', function (e) {
                 data.main.humidity,
                 data.visibility,
             ).render()
+        }).catch(error => alert("There is no city with that name"))
+    }
+});
+
+// map of city from search
+
+searchButton.addEventListener("click", () => {
+    let myCity = inputContent.value;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${myCity}&units=metric&APPID=5d066958a60d315387d9492393935c19`)
+    .then(res => res.json())
+    .then(data => {
+        return new google.maps.Map(document.getElementById("map"), {
+            center: {lat: data.coord.lat, lng: data.coord.lon},
+            zoom: 9
+        });
+    })
+})
+
+inputContent.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        let myCity = inputContent.value;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${myCity}&units=metric&APPID=5d066958a60d315387d9492393935c19`)
+        .then(res => res.json())
+        .then(data => {
+            return new google.maps.Map(document.getElementById("map"), {
+                center: {lat: data.coord.lat, lng: data.coord.lon},
+                zoom: 9
+            });
         })
     }
 });
