@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather project</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header__search">
+                        <div class="header__input">
+                            <input type="text" placeholder="Search city">
+                        </div>
+                        <button></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="row main__row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="main__data">
+                        <h2 class="main__time">Sep 25, 13:42</h2>
+                        <h1 class="main__city">London, UK</h1>
+                        <div class="main__temp">
+                            <img src="https://openweathermap.org/img/w/10d.png" alt="">
+                            <h1>14°C</h1>
+                        </div>
+                        <h3 class="main__feels-like">Feels like 13°C. Overcast clouds. Light breeze</h3>
+                        <div class="main__other-info">
+                            <h3 class="wind-speed">3.4 m/s</h3>
+                            <h3 class="humidity">Humidity: 62%</h3>
+                            <h3 class="visibility">Visibility: 10.0km</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="main__map">
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=25.13019561767578%2C50.66295522090179%2C25.451545715332035%2C50.81482934166636&amp;layer=mapnik" style="border: 1px solid black"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">© Kurazan 2022</footer>
+    <script src="script.js"></script>
+</body>
+</html>
